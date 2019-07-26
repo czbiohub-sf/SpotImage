@@ -1,11 +1,13 @@
 """ This module contains the SpotImage class.
 """
 
-import cv2, math, random
+import math, random
 import matplotlib.pyplot as plt
 import numpy as np
 from matplotlib.lines import Line2D
 from skimage import filters
+from skimage.io import imread
+from skimage.transform import resize
 from skimage.restoration import estimate_sigma
 from sklearn.neighbors import KDTree
 
@@ -67,14 +69,14 @@ class SpotImage():
 		self.global_intensity_dial = global_intensity_dial		# adds to self.threshold
 		self.valid_coords = self.get_valid_coords()				# list of coordinates where spots may be placed
 		self.total_coord_list = [self.get_spot_coord() for i in range(self.increment)]
+		self.ballpark = ballpark
 
 	"""
 	Returns an image as an array of gray values, squished down to img_sz x img_sz.
 	"""
 	def img_to_array(self, img_filename):
-		img = cv2.imread(img_filename)					# img is a numpy 2D array
-		img_gray = cv2.cvtColor(img, cv2.COLOR_RGB2GRAY)	
-		return cv2.resize(img_gray, (self.img_sz, self.img_sz))
+		img = imread(img_filename, as_gray=True) 
+		return resize(img, (self.img_sz, self.img_sz))
 
 	"""
 	Returns the set of coordinates where spots may be added.
@@ -115,6 +117,7 @@ class SpotImage():
 			self.num_spots = math.floor(density * len(self.valid_coords))
 
 			# constrict valid region to get a good ballpark number of spots
+			ballpark = 75
 			while(self.num_spots > num_spots + ballpark):								
 				self.global_intensity_dial += global_intensity_dial_increment
 				self.valid_coords = self.get_valid_coords()
@@ -351,6 +354,7 @@ class SpotImage():
 		plt.axis('equal')
 		plt.xlim(0, self.img_sz)
 		plt.ylim(0, self.img_sz)
+		plt.gca().invert_yaxis()
 		plt.title('Coordinates')
 		plt.show()
 
