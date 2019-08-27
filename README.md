@@ -1,3 +1,3 @@
 # SpotImage
 
-The SpotImage tool generates synthetic FISH spot images. 
+The SpotImage tool generates synthetic in situ transcriptomics images. 

@@ -69,7 +69,6 @@ class SpotImage():
 		self.global_intensity_dial = global_intensity_dial		# adds to self.threshold
 		self.valid_coords = self.get_valid_coords()				# list of coordinates where spots may be placed
 		self.total_coord_list = [self.get_spot_coord() for i in range(self.increment)]
-		self.ballpark = ballpark
 
 	"""
 	Returns an image as an array of gray values, squished down to img_sz x img_sz.
