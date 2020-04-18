@@ -1,3 +1,5 @@
 # SpotImage
 
-The SpotImage tool generates synthetic in situ transcriptomics images. 
+SpotImage is a tool for generating synthetic images with customizable characteristics similar to in situ transcriptomics images. It facilitates experiments with crowdsourced annotator behavior because ground truth in the synthetic images is perfectly known. The user can assign a biologically realistic background image and control characteristics of the spots including number, size, shape, crowdedness, SNR, and distribution across the image.
+
+In the **demo_notebooks** folder, you can explore two notebooks which demonstrate usage of the tool.
